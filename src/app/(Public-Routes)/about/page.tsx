@@ -1,6 +1,6 @@
 "use client"
 /* eslint-disable react/no-unescaped-entities */
-import Button from "@/components/button/Button"
+import Button from "@/app/button/Button"
 import Image from "next/image"
 import Link from "next/link"
 import React, { useState } from "react"
@@ -17,6 +17,7 @@ import Howwework from "@/components/about/howwework"
 import Faqs from "../faqs/Faqs"
 import Contact from "../contact/page"
 import Banner from "../Home/banner/Banner"
+import { brandImages } from "../Home/Carousel"
 
 const settings = {
   dots: true,
@@ -57,10 +58,10 @@ const About = () => {
             <h2 className="text-[1rem] font-bold mb-[.75rem] slideUp">
               Innovative
             </h2>
-            <p className="text-[2.5rem] lg:text-[3rem]  xl:text-[3.5rem] leading-tight tracking-tight font-bold mb-[1.25rem]">
+            <p className="text-[2.5rem] lg:text-[3rem]  xl:text-[3.5rem] leading-tight tracking-tight font-bold mb-[0.5rem]">
               Bringing Ideas to Life
             </p>
-            <p className="font-Inter text-[1rem] lg:text-[1.25rem] xl:text-[1.15rem] font-normal mb-[.5rem] md:w-[85%] ">
+            <p className="font-Inter text-[1rem] lg:text-[1rem] xl:text-[1rem] font-normal md:w-[75%] ">
               BitSaac is an innovative tech agency and community of tech
               creatives, dedicated to bringing ideas to life through product
               design and development.
@@ -69,15 +70,15 @@ const About = () => {
               <div className="sm:flex sm:gap-[1rem] sm:items-center">
                 <input
                   type="text"
-                  className="p-3 rounded-md outline-0 w-full sm:w-[50%] h-[40px]  text-black"
+                  className="p-3 rounded-md outline-0 w-full sm:w-[50%] h-[40px] my-[1rem] text-black"
                   placeholder="Enter Email here..."
                 />
-                <Button className="bg-primary rounded-md w-full sm:w-[20%] md:w-[25%] md:h-[40px] my-[1rem] ">
+                <Button className="bg-primary rounded-md w-full sm:w-[10%] md:w-[15%] md:h-[40px] my-[1rem] ">
                   Get Started
                 </Button>
               </div>
-              <div className="lg:w-[70%] md:w-[70%]">
-                <span className="text-[.95rem] md:text-[.8rem] lg:text-[1rem] font-normal">
+              <div className="w-[70%]">
+                <span className="text-[0.75rem] font-normal">
                   By clicking the button, you're confirming that you agree with
                   our Terms and Conditions.
                 </span>
@@ -87,44 +88,36 @@ const About = () => {
         </div>
       </div>
 
-      <div className="lg:relative">
+      <div>
         {/* ABOUT SECTION */}
-        <div className="py-[4rem] lg:py-[7rem] lg:pb-[10rem] px-[1.25rem] font-Inter md:px-[32px] xl:px-[64px] ">
+        <div className="py-[7rem] lg:py-[7rem] px-[7rem] font-Inter md:px-[32px] xl:px-[64px] ">
           <div className="lg:flex lg:gap-[3rem]">
             <div className="md:w-[70%] lg:w-[50%]">
-              <p className="text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-Raleway font-bold leading-tight mb-[1.5rem]">
+              <p className="text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-Raleway font-bold leading-tight mb-[1rem]">
                 Innovative Tech Agency Delivering Exceptional Results for
                 Clients
               </p>
-              <p className="font-normal text-[1rem] lg:text-[1.2rem]">
+              <p className="font-normal text-[1rem] lg:text-[20px]">
                 BitSaac is an innovative tech agency committed to delivering
                 exceptional results for our clients. With a strong focus on
                 product design and development, we bring ideas to life and help
                 businesses achieve their goals.
               </p>
             </div>
-            <div className="py-[2rem] flex items-center justify-between gap-[1rem] overflow-x-auto lg:flex-wrap lg:w-[50%] xl:w-[40%]">
-              <Image
-                src="/Vector.svg"
-                alt=""
-                width={200}
-                height={200}
-                className="w-[9.7rem] bg-black rounded-md"
-              />
-              {AllImages().map((item) => (
+            <div className="border rounded-lg border-zinc-200 bg-white100 shad p-[2rem] flex items-center justify-between gap-[2rem] overflow-x-auto lg:flex-wrap lg:w-[50%]">
+              {brandImages.slice(0, 6).map((image) => (
                 <Image
-                  key={item.id}
-                  src={item.img}
-                  alt={item.name}
+                  key={image.id}
+                  src={image.src}
+                  alt={"brand"}
                   width={200}
                   height={200}
-                  className="w-[9.7rem]"
+                  className="w-[10rem]"
                 />
               ))}
             </div>
           </div>
         </div>
-        <Talktousbutton className="bg-primary rounded-md text-white my-[1rem] mx-[1.25rem] md:mx-[64px] lg:absolute lg:top-[22%] xl:top-[15%]" />
 
         {/* PROCESS SECTION */}
         <Howwework />
@@ -181,12 +174,7 @@ const About = () => {
               growth and success in the digital marketplace.
             </p>
             <div className="py-[1rem]">
-              <Button className="text-btn-secondary border border-btn-secondary rounded-md font-Raleway text-[1rem] md:text-[.8rem] lg:text-[1rem]">
-                Get Started
-              </Button>
-              <Button className="text-btn-secondary font-Raleway text-[1rem] md:text-[.8rem] lg:text-[1rem]">
-                Learn More
-              </Button>
+              <Talktousbutton className="bg-primary rounded-md text-white" />
             </div>
           </div>
           <Image
@@ -209,10 +197,8 @@ const About = () => {
       {/* THE TEAM */}
 
       <div className="py-[4rem] xl:py-[7rem] font-Inter px-[1.25rem] md:px-[32px] xl:px-[64px]">
-        <h4 className="text-[1rem] font-bold mb-[1rem] leading-tight">
-          Innovators
-        </h4>
-        <h2 className="text-[2rem] font-bold mb-[1.5rem] text-[#2A2738]">
+        <h4 className="text-[1rem] font-bold  leading-tight">Innovators</h4>
+        <h2 className="text-[2rem] md:text-[1.2rem] lg:text-[2rem] xl:text-[2.5rem] font-bold leading-tight my-[0.5rem]">
           Meet Our Team
         </h2>
         <p className="text-[1rem] font-normal leading-tight">
@@ -255,11 +241,6 @@ const About = () => {
           ))}
         </div>
       </div>
-      <div>
-        <Button>View All</Button>
-        <div></div>
-      </div>
-
       <Faqs />
       <Contact />
       <Banner />

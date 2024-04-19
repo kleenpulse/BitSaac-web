@@ -12,10 +12,25 @@ const Talktousbutton = ({ className }: { className?: string }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // I shouldn't be able to scroll when modal is open
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    // clicking "escape key" should close the modal
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 950);
     };
 
+    // listen for escape keypress
     const handleCloseModal = (event: MouseEvent) => {
       if (
         modalRef.current &&
@@ -28,6 +43,7 @@ const Talktousbutton = ({ className }: { className?: string }) => {
     handleResize();
 
     window.addEventListener("resize", handleResize);
+    document.addEventListener("keydown", handleKeyDown);
 
     if (isOpen) {
       document.addEventListener("mousedown", handleCloseModal);
@@ -35,6 +51,7 @@ const Talktousbutton = ({ className }: { className?: string }) => {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("keydown", handleKeyDown);
 
       if (isOpen) {
         document.removeEventListener("mousedown", handleCloseModal);
@@ -65,8 +82,8 @@ const Talktousbutton = ({ className }: { className?: string }) => {
         {isOpen && (
           <div
             className={cn(
-              "fixed top-0 left-0 overflow-hidden w-full h-full bg-[rgba(0,0,0,0.8)] flex flex-col items-center justify-center transition-[var(--transition)] invisible z-[-10] backdrop-blur-[1rem]",
-              isOpen ? "visible z-19" : "",
+              "fixed top-0 left-0  overflow-hidden w-full h-screen bg-[rgba(0,0,0,0.8)] flex flex-col items-center justify-center transition-[var(--transition)] invisible z-[-10] backdrop-blur-[1rem]",
+              isOpen ? "visible z-[99999]" : "",
             )}
           >
             <div
